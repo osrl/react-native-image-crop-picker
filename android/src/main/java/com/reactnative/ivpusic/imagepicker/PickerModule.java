@@ -75,7 +75,7 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
     private boolean multiple = false;
     private boolean includeBase64 = false;
     private boolean includeExif = false;
-    private boolean respectExifRotation = false;
+    private boolean respectExifRotation = true;
     private boolean cropping = false;
     private boolean cropperCircleOverlay = false;
     private boolean freeStyleCropEnabled = false;
@@ -128,7 +128,7 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         multiple = options.hasKey("multiple") && options.getBoolean("multiple");
         includeBase64 = options.hasKey("includeBase64") && options.getBoolean("includeBase64");
         includeExif = options.hasKey("includeExif") && options.getBoolean("includeExif");
-        respectExifRotation = options.hasKey("respectExifRotation") && options.getBoolean("respectExifRotation");
+        respectExifRotation = !options.hasKey("respectExifRotation") || options.getBoolean("respectExifRotation");
         width = options.hasKey("width") ? options.getInt("width") : 0;
         height = options.hasKey("height") ? options.getInt("height") : 0;
         cropping = options.hasKey("cropping") && options.getBoolean("cropping");
