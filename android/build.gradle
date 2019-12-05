@@ -1,9 +1,21 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.1'
+    }
+}
+
 apply plugin: 'com.android.library'
 
 def DEFAULT_COMPILE_SDK_VERSION   = 28
 def DEFAULT_BUILD_TOOLS_VERSION   = "28.0.3"
 def DEFAULT_TARGET_SDK_VERSION    = 28
 def DEFAULT_MIN_SDK_VERSION       = 16
+
+
 
 android {
         compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : DEFAULT_COMPILE_SDK_VERSION
@@ -16,6 +28,18 @@ android {
     }
     lintOptions {
         abortOnError false
+    }
+}
+
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    maven {
+        // All of React Native (JS, Android binaries) is installed from npm
+        url "/Users/osrl/Documents/brandcamp-mobile/node_modules/react-native/android/"
     }
 }
 
