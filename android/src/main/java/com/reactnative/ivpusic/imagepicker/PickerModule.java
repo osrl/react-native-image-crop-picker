@@ -342,7 +342,7 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         try {
             final Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
 
-            if (cropping || mediaType.equals("photo")) {
+            if (mediaType.equals("photo")) {
                 galleryIntent.setType("image/*");
             } else if (mediaType.equals("video")) {
                 galleryIntent.setType("video/*");
@@ -685,7 +685,19 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
                     return;
                 }
 
-                if (cropping) {
+                boolean isVideo = false;
+
+                try {
+                    String path = resolveRealPath(activity, uri, false);
+                    if (path != null || !path.isEmpty()) {
+                        String mime = getMimeType(path);
+                        if (mime != null && mime.startsWith("video/")) {
+                            isVideo = true;
+                        }
+                    }
+                } catch (Exception ignore) { }
+
+                if (cropping && !isVideo) {
                     startCropping(activity, uri);
                 } else {
                     try {
